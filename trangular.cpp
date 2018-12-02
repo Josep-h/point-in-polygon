@@ -66,9 +66,16 @@ class poly_tri{//def of the polygon triangulated with the algorithm
 };
 
 //funs in triangle
-bool tri::test(tup tt)
+bool tri::test(tup tt)//divide the vector into two edge vector, and the sum of the division must <= than 1
 {
-
+    float v,u;
+    //compute v
+    v=(a.y*b.x-a.x*b.y+tt.y*a.x-tt.x*a.y)/((b.y-a.y)*(c.x-a.x)-(c.y-a.y)*(b.x-a.x));
+    if(v<0) return 0;
+    //compute u
+    u=(a.y*c.x-a.x*c.y+tt.y*a.x-tt.x*a.y)/((b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x));
+    if(u<0) return 0;
+    return u+v<=1;//test the sum
 }
 
 //funs trans polyy to poly_tri

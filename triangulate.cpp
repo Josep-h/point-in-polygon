@@ -51,7 +51,7 @@ class poly{//that's the polygon marked by the point formation
     tup down_left;
     vector<tup> cons;
     poly(){}
-    poly_tri triangulate();
+    //poly_tri triangulate();
 };
 
 class poly_tri{//def of the polygon triangulated with the algorithm
@@ -67,18 +67,21 @@ class poly_tri{//def of the polygon triangulated with the algorithm
 
 //funs in triangle
 bool tri::test(tup tt)//divide the vector into two edge vector, and the sum of the division must <= than 1
-{
+{//tests passed in this method the edge counts in the triangle
     float v,u;
+    float xba=b.x-a.x, xca=c.x-a.x, xpa=tt.x-a.x;
+    float yba=b.y-a.y, yca=c.y-a.y, ypa=tt.y-a.y;
+    float xba_yca_xca_yba=xba*yca-xca*yba;
     //compute v
-    v=(a.y*b.x-a.x*b.y+tt.y*a.x-tt.x*a.y)/((b.y-a.y)*(c.x-a.x)-(c.y-a.y)*(b.x-a.x));
+    v=(ypa*xba-yba*xpa)/xba_yca_xca_yba;
     if(v<0) return 0;
     //compute u
-    u=(a.y*c.x-a.x*c.y+tt.y*a.x-tt.x*a.y)/((b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x));
+    u=(ypa*xca-yca*xpa)/(-xba_yca_xca_yba);
     if(u<0) return 0;
     return u+v<=1;//test the sum
 }
 
-//funs trans polyy to poly_tri
+/*funs trans polyy to poly_tri
 poly_tri poly::triangulate()
 {
     poly_tri after;
@@ -91,5 +94,5 @@ poly_tri poly::triangulate()
 
     //devide the graph into two pieces and start to devide the rest graph
     return after;
-}
+}*/
 

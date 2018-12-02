@@ -12,7 +12,7 @@ Use the triangulation method to test the point-in-polygon in the following way:
 
 1. Split the polygon into triangle and store the triangle with the polygon'id in a R*-tree.
 
-2. So I need to develop a way to judge a point in a triangle which can be done in O(1)._(finished)_
+2. So I need to develop a way to judge a point in a triangle which can be done in O(1).**(finished)**&**(passed test)**
 
 3. Then I need to make a R*-tree to store my triangle which I will use a open sourse library of R*-tree. And the library will be tested before formally using.
 

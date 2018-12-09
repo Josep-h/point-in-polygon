@@ -17,7 +17,8 @@ class tup{//def of the tuple
         return y==now.y&&x==now.x;
     }
 };
-bool cmp_complex(vector<tup> &ring,int &left,int &right,int sz,stack<tup> &path)//input the two tuple and return next one considered
+
+/*bool cmp_complex(vector<tup> &ring,int &left,int &right,int sz,stack<tup> &path)//input the two tuple and return next one considered
 {
     if(ring[left].y>ring[right].y)
     {
@@ -34,7 +35,7 @@ bool cmp_complex(vector<tup> &ring,int &left,int &right,int sz,stack<tup> &path)
 bool cmp(vector<tup> &ring,int &left,int &right)
 {
     return ring[left].y>ring[right].y;
-}
+}*/
 class tri{//def of triangle
     public:
     int id;
@@ -78,7 +79,7 @@ class poly{//that's the polygon marked by the point formation
     poly(){}
     poly_tri triangulate();
 };
-
+/*
 class poly_tri{//def of the polygon triangulated with the algorithm
     public:
     int id;//the same as the id the ori polygon has
@@ -89,7 +90,7 @@ class poly_tri{//def of the polygon triangulated with the algorithm
     poly_tri(int id):id(id){}
     bool test(tup tt);//fun to finish the point-in-polygon test
 };
-
+*/
 //funs in triangle
 bool tri::test(tup tt)//divide the vector into two edge vector, and the sum of the division must <= than 1
 {//tests passed in this method the edge counts in the triangle
@@ -105,7 +106,7 @@ bool tri::test(tup tt)//divide the vector into two edge vector, and the sum of t
     if(u<0) return 0;
     return u+v<=1;//test the sum
 }
-
+/*
 bool next_point(vector<tup> &ring,int &left,int &right,int &next,int sz)
 {
     if(cmp(ring,left,right)) 
@@ -120,8 +121,8 @@ bool next_point(vector<tup> &ring,int &left,int &right,int &next,int sz)
         right=(right-1+sz)%sz;
         return 0;
     }
-}
-
+}*/
+/*
 //funs trans poly to poly_tri
 poly_tri poly::triangulate()
 {
@@ -215,5 +216,5 @@ poly_tri poly::triangulate()
     }
     //devide the graph into two pieces and start to devide the rest graph
     return after;
-}
+}*/
 

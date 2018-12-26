@@ -1,7 +1,7 @@
 #include "submit-4MixQueryPoint.h"
 
 void SetEnvironmentFromMixQueryPoint() {
-
+;
 }
 
 std::vector<int> QueryPointFromMixQueryPoint(double x, double y) {

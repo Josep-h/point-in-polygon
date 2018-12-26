@@ -1,7 +1,7 @@
 #include "submit-3AddBeforeQuery.h"
 
 void SetEnvironmentFromAddBeforeQuery() {
-
+;
 }
 
 void AddPointFromAddBeforeQuery(int id, double x, double y) {

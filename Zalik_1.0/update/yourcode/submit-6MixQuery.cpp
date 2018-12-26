@@ -1,7 +1,7 @@
 #include "submit-6MixQuery.h"
 
 void SetEnvironmentFromMixQuery() {
-
+;
 }
 
 void AddPointFromMixQuery(int id, double x, double y) {

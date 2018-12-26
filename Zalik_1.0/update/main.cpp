@@ -4,7 +4,14 @@
 #include "yourcode/submit-4MixQueryPoint.h"
 #include "yourcode/submit-5MixQueryPolygon.h"
 #include "yourcode/submit-6MixQuery.h"
-
+/*
+#include "yourcode/submit-1AddPolygonBeforeQueryPoint.cpp"
+#include "yourcode/submit-2AddPointBeforeQueryPolygon.cpp"
+#include "yourcode/submit-3AddBeforeQuery.cpp"
+#include "yourcode/submit-4MixQueryPoint.cpp"
+#include "yourcode/submit-5MixQueryPolygon.cpp"
+#include "yourcode/submit-6MixQuery.cpp"
+*/
 #include <fstream>
 #include <iostream>
 #include <algorithm>

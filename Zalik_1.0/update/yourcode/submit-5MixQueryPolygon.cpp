@@ -5,7 +5,7 @@
 #include "submit-5MixQueryPolygon.h"
 
 void SetEnvironmentFromMixQueryPolygon() {
-
+;
 }
 
 void AddPointFromMixQueryPolygon(int id, double x, double y) {

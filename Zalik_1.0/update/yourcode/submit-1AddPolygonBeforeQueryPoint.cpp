@@ -1,6 +1,6 @@
 #include "submit-1AddPolygonBeforeQueryPoint.h"
 
-void SetEnvironmentFromAddPolygonBeforeQueryPoint() {
+void SetEnvironmentFromAddPolygonBeforeQueryPoint() {;
 }
 
 std::vector<int> QueryPointFromAddPolygonBeforeQueryPoint(double x, double y) {

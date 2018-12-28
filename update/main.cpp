@@ -1,3 +1,6 @@
+//这个版本使用四分树,但是没有使用R树快,差距也并不大,
+//但是使用的是非平衡的插入方法所以会慢一些,但是这个板子的平衡方法似乎有问题.
+//如果使用平衡的方法可能速度就上去了
 #include "yourcode/submit-1AddPolygonBeforeQueryPoint.h"
 #include "yourcode/submit-2AddPointBeforeQueryPolygon.h"
 #include "yourcode/submit-3AddBeforeQuery.h"
@@ -19,7 +22,9 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
-
+#include <time.h>
+#include <string>
+//这个版本采用的区间树,但不知道什么原因,使用的时间非常之多
 int environment_variable(0);
 
 void PrintAnswerOut(std::fstream &fout, std::vector<int> &answer_vector)
@@ -36,7 +41,7 @@ void AddPoint(std::fstream &fin) {
     double y;
     fin >> id;
     fin >> x >> y;
-
+    //cout<<"AddPoint..."<<endl;
     switch (environment_variable) {
         case 2: {
             AddPointFromAddPointBeforeQueryPolygon(id, x, y);
@@ -62,6 +67,7 @@ void AddPoint(std::fstream &fin) {
 void DeletePoint(std::fstream &fin) {
     int id;
     fin >> id;
+    //cout<<"DeletePoint..."<<endl;
     switch (environment_variable) {
         case 5: {
             DeletePointFromMixQueryPolygon(id);
@@ -82,6 +88,7 @@ void QueryPoint(std::fstream &fin, std::fstream &fout) {
     double y;
     fin >> x >> y;
     std::vector<int> query_answer;
+    //cout<<"QuaryPoint..."<<endl;
     switch (environment_variable) {
         case 1: {
             query_answer = QueryPointFromAddPolygonBeforeQueryPoint(x, y);
@@ -115,6 +122,7 @@ void AddPolygon(std::fstream &fin) {
     fin >> n;
     double x;
     double y;
+    //cout<<"AddPolygon..."<<endl;
     for (int i = 0; i < n; ++i) {
         fin >> x >> y;
         polygon.emplace_back(std::make_pair(x, y));
@@ -146,6 +154,7 @@ void AddPolygon(std::fstream &fin) {
 void DeletePolygon(std::fstream &fin) {
     int id;
     fin >> id;
+    //cout<<"DeletePolygon..."<<endl;
     switch (environment_variable) {
         case 4: {
             DeletePolygonFromMixQueryPoint(id);
@@ -167,6 +176,7 @@ void QueryPolygon(std::fstream &fin, std::fstream &fout) {
     fin >> n;
     double x;
     double y;
+    //cout<<"QuaryPolygon..."<<endl;
     for (int i = 0; i < n; ++i) {
         fin >> x >> y;
         polygon.emplace_back(std::make_pair(x, y));
@@ -198,8 +208,8 @@ void QueryPolygon(std::fstream &fin, std::fstream &fout) {
 }
 
 int main() {
+    time_t t; t = time(NULL);
     std::cout << "Hello, World!" << std::endl;
-
     std::fstream fin("test.in", std::fstream::in);
     std::fstream fout("test.out", std::fstream::out);
 
@@ -278,6 +288,8 @@ int main() {
     fout.close();
 
     std::cout << "Well Done!" << std::endl;
-
+    time_t t2; t2 = time(NULL);
+    cout<<t2-t<<endl;
+    for(;;);
     return 0;
 }

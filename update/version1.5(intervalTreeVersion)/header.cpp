@@ -25,17 +25,26 @@ TriPolygon::TriPolygon(Polygon &in)
 {
     interTree::interval_vector in_changed;
     int sz=in.size();
-    double xmin,max;
     for(int i=0;i<sz-1;i++)
     {
         int j=i+1;
-        edge one;one.first.first=in[i].first;one.first.second=in[i].second;
-        one.second.first=in[j].first;one.second.second=in[j].second;
-        in_changed.push_back(interTree::interval(in[i].first,in[j].first,one));
+        double xtp1,xtp2,ytp1,ytp2;
+        pair<double,double> k_b;
+        xtp1=in[i].first;
+        xtp2=in[j].first;
+        ytp1=in[i].second;
+        k_b.first=(in[j].second-ytp1)/(xtp2-xtp1);
+        k_b.second=ytp1-xtp1*k_b.first;
+        in_changed.push_back(interTree::interval(in[i].first,in[j].first,k_b));
     }
-    edge one;one.first.first=in[sz-1].first;one.first.second=in[sz-1].second;
-    one.second.first=in[0].first;one.second.second=in[0].second;
-    in_changed.push_back(Interval<double,edge>(in[sz-1].first,in[0].first,one));
+        double xtp1,xtp2,ytp1,ytp2;
+        pair<double,double> k_b;
+        xtp1=in[sz-1].first;
+        xtp2=in[0].first;
+        ytp1=in[sz-1].second;
+        k_b.first=(in[0].second-ytp1)/(xtp2-xtp1);
+        k_b.second=ytp1-xtp1*k_b.first;
+        in_changed.push_back(interTree::interval(in[sz-1].first,in[0].first,k_b));
     tree=interTree(move(in_changed),16,1);
 }
 
@@ -117,24 +126,10 @@ bool CallForPolygon(int id)//Myversion
     sz=ans.size();
     for(int i=0;i!=sz;i++)
     {
-        //int s=(i+2)%sz;
-        xtp1=ans[i].value.first.first;
-        xtp2=ans[i].value.second.first;
-        //xtp1=ans[i].first.first;
-        //xtp2=ans[i].second.first;
-        if((xtp1<(*p).x&&xtp2>(*p).x)\
-        ||(xtp1>(*p).x&&xtp2<(*p).x))
-        {
-            
-            //if(polygon_in[i].first==polygon_in[j].first)
-            //continue;
-            ytp1=ans[i].value.first.second;
-            k=(ans[i].value.second.second-ytp1)/(xtp2-xtp1);
-            b=ytp1-xtp1*k;
-            y=k*(*p).x+b;
-            if(y>(*p).y)
-            ct++;
-        }
+        k=ans[i].value.first,b=ans[i].value.second;
+        y=k*(*p).x+b;
+        if(y>(*p).y)
+        ct++;
     }
     if(ct%2)
     poly_ans.push_back(id);
@@ -153,7 +148,7 @@ bool CallForPoint(int id)
 {
     //cout<<"Checking: "<<id<<endl;      //DEBUG
     int ct=0,i=0,j;
-    static TYPE k,b,y,xtp1,ytp1,xtp2;
+    static TYPE k,b,y;
     tup p=point_map[id];
     //cout<<p.x<<" "<<p.y<<endl;
     ans.clear();
@@ -162,22 +157,10 @@ bool CallForPoint(int id)
     //int sz=polygon_in.size();
     for(int i=0;i!=sz;i++)
     {
-        //int s=(i+2)%sz;
-        xtp1=ans[i].value.first.first;
-        xtp2=ans[i].value.second.first;
-        if((xtp1<(p).x&&xtp2>(p).x)\
-        ||(xtp1>(p).x&&xtp2<(p).x))
-        {
-            
-            //if(polygon_in[i].first==polygon_in[j].first)
-            //continue;
-            ytp1=ans[i].value.first.second;
-            k=(ans[i].value.second.second-ytp1)/(xtp2-xtp1);
-            b=ytp1-xtp1*k;
-            y=k*(p).x+b;
-            if(y>(p).y)
-            ct++;
-        }
+        k=ans[i].value.first,b=ans[i].value.second;
+        y=k*p.x+b;
+        if(y>p.y)
+        ct++;
     }
     if(ct%2)
     point_ans.push_back(id);

@@ -3,7 +3,9 @@
 #include<iostream>
 using namespace std;
 polygon_tree py_tree;
-point_tree pt_tree;
+vertex origin=vertex(0,0);
+vertex axis=vertex(10,10);
+point_tree *pt_tree=new point_tree(origin, axis);
 
 unordered_map<polygon_id,TriPolygon> TriPolygon_map;
 unordered_map<point_id,tup> point_map;
@@ -17,7 +19,6 @@ vector<int> poly_ans(10000);
 
 TriPolygon *polygon_test_now;
 tup tup_test_now;
-vector<int> ans2(10000);
 
 TYPE maxd[2],mind[2];
 interTree::interval_vector ans;
@@ -93,14 +94,16 @@ void pointTreeInsert(double x,double y,int id)
     //Stup one=Stup(tup(x,y));
     if(iter2!=point_map.end()) return ;*/
     point_map[id]=tup(x,y);
-    point one=point(x,y,id);
-    pt_tree.Insert(one);
+    (*pt_tree).insert(vertex(x,y),id);
     return ;
 }
 
 void pointTreeRemove(int id)
 {
     iter2=point_map.find(id);
+    /*if(iter2==point_map.end())
+    return;
+    */
     mind[0]=maxd[0]=iter2->second.x;
     mind[1]=maxd[1]=iter2->second.y;
 
@@ -222,11 +225,12 @@ void QuaryPolygon(int sz,Polygon &py)
         else if(ytp<ymin)
             ymin=ytp;
     }
-    ans2.clear();
-    pt_tree.RegionResearch(xmin,xmax,ymin,ymax,ans2);
+    vertex min=vertex(xmin,ymin);
+    vertex max=vertex(xmax,ymax);
+    vector<pair<vertex,int>> ans2=(*pt_tree).getObjectsInRegion(min,max);
     sz=ans2.size();
     for(int i=0;i!=sz;i++)
-        CallForPoint(ans2[i]);
+        CallForPoint(ans2[i].second);
     return ;
 }
 

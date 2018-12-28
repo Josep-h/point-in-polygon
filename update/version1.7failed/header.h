@@ -1,7 +1,7 @@
 #pragma once
 #include"RTree.h"
 #include"IntervalTree.h"
-#include"Quad_Tree.h"
+#include"QuadTree.h"
 #include<vector>
 #include<unordered_map>
 using namespace std;
@@ -10,11 +10,10 @@ typedef double TYPE2;
 typedef int polygon_id;
 typedef int point_id;
 typedef vector<pair<double,double>> Polygon;
-typedef Point<double> point;
 
 typedef RTree<polygon_id,TYPE,2,TYPE> polygon_tree;
 typedef IntervalTree<double,pair<double,double>> interTree;//mark as k,b
-typedef QuardTree<double> point_tree;
+typedef QuadTree<int> point_tree;
 
 class tup{//def of the tuple
     public:
@@ -52,7 +51,7 @@ extern unordered_map<point_id,tup>::iterator iter2;
 
 //extern point_tree pt_tree;
 extern polygon_tree py_tree;
-extern point_tree pt_tree;
+extern point_tree *pt_tree;
 
 extern TYPE maxd[2],mind[2];
 
@@ -61,6 +60,8 @@ extern vector<int> point_ans;
 
 extern TriPolygon *polygon_test_now;
 extern tup tup_test_now;
+
+
 
 //extern MinMax bound;
 

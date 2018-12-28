@@ -12,7 +12,7 @@ typedef vector<pair<double,double>> Polygon;
 
 typedef RTree<polygon_id,TYPE,2,TYPE> polygon_tree;
 typedef RTree<point_id,TYPE,2,TYPE> point_tree;
-typedef double T;
+
 class tup{//def of the tuple
     public:
     TYPE x;
@@ -21,7 +21,7 @@ class tup{//def of the tuple
     tup(TYPE x,TYPE y):x(x),y(y){}
 };
 typedef pair<pair<double,double>,pair<double,double>> edge;
-typedef IntervalTree<double,edge> interTree;
+typedef IntervalTree<double,pair<double,double>> interTree;//mark as k,b
 class MinMax{
     public:
     TYPE min[2];
